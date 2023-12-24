@@ -17,6 +17,8 @@ fi
 ORGANIZATION=$ORGANIZATION
 ACCESS_TOKEN=$ACCESS_TOKEN
 REPO=$REPO
+LABELS=$LABELS
+NAME=$NAME
 
 echo "Setup - Determining matching runner..."
 
@@ -42,9 +44,9 @@ fi
 
 echo "Setup - Configuring runner..."
 if [ -z "$REPO" ]; then
-  ./config.sh --url https://github.com/${ORGANIZATION} --token ${REG_TOKEN}
+  ./config.sh --url https://github.com/${ORGANIZATION} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
 else
-  ./config.sh --url https://github.com/${ORGANIZATION}/${REPO} --token ${REG_TOKEN}
+  ./config.sh --url https://github.com/${ORGANIZATION}/${REPO} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
 fi
 
 cleanup() {

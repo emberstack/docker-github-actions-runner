@@ -25,5 +25,17 @@ The runner can be deployed in Docker using either `docker run` or `docker compos
 #### Deployment in `docker`
 
 ```
-docker run -d -e ORGANIZATION="<org name>" -e ACCESS_TOKEN="<access token>" -e REPO="<optional repo name>" emberstack/github-actions-runner
+docker run -d -e ACCESS_TOKEN="<access token>" -e ORGANIZATION="<org name>" -e REPO="<optional repo name>" emberstack/github-actions-runner
 ```
+
+> See [Managing your personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to understand how to get an access token. 
+
+You can customize the values of the deployment by using the following environment variables:
+
+| Environment Variable          | Description                                                                                       | Required                                                 |
+|-------------------------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `ACCESS_TOKEN`                | The access token (PAT - Personal Access token) used to register the runner                        | Required                                                 |
+| `ORGANIZATION`                | The owner or organization                                                                         | Required                                                 |
+| `REPO`                        | The repository on which to register the runner                                                    | Optional - Registers to the org. if not specified        |
+| `LABELS`                      | Comma separated list of labels to apply to the runner                                             | Optional                                                 |
+| `NAME`                        | Runner name                                                                                       | Optional - Defaults to the hostname if not specified     |
