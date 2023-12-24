@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    echo "Setup - Including ./local/bin in PATH..."
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+
 ARCHITECTURE="$(arch)"
 PLATFORM=$ARCHITECTURE
 if [[ $PLATFORM == x86_64 ]]; then
