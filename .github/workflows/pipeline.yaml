@@ -31,9 +31,9 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx create --name builder --driver docker-container --use
           docker buildx inspect --bootstrap
-          docker buildx build --platform linux/amd64 -t ${{env.imageRepository}}:build-${{env.version}}-amd64   -f src/docker/Dockerfile src/
-          docker buildx build --platform linux/arm   -t ${{env.imageRepository}}:build-${{env.version}}-arm32v7 -f src/docker/Dockerfile src/
-          docker buildx build --platform linux/arm64 -t ${{env.imageRepository}}:build-${{env.version}}-arm64v8 -f src/docker/Dockerfile src/
+          docker buildx build --platform linux/amd64 -t ${{env.imageRepository}}:build-${{env.version}}-amd64   -f src/docker/Dockerfile src/docker
+          docker buildx build --platform linux/arm   -t ${{env.imageRepository}}:build-${{env.version}}-arm32v7 -f src/docker/Dockerfile src/docker
+          docker buildx build --platform linux/arm64 -t ${{env.imageRepository}}:build-${{env.version}}-arm64v8 -f src/docker/Dockerfile src/docker
 
       - name: tools - docker - login
         if: github.event_name == 'push' && github.actor != 'dependabot[bot]'
@@ -49,9 +49,9 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx create --name builder --driver docker-container --use
           docker buildx inspect --bootstrap
-          docker buildx build --push --platform linux/amd64 --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-amd64   -f src/docker/Dockerfile src/
-          docker buildx build --push --platform linux/arm   --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-arm32v7 -f src/docker/Dockerfile src/
-          docker buildx build --push --platform linux/arm64 --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-arm64v8 -f src/docker/Dockerfile src/
+          docker buildx build --push --platform linux/amd64 --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-amd64   -f src/docker/Dockerfile src/docker
+          docker buildx build --push --platform linux/arm   --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-arm32v7 -f src/docker/Dockerfile src/docker
+          docker buildx build --push --platform linux/arm64 --provenance=false -t ${{env.imageRepository}}:build-${{env.version}}-arm64v8 -f src/docker/Dockerfile src/docker
           docker pull --platform linux/amd64 ${{env.imageRepository}}:build-${{env.version}}-amd64
           docker pull --platform linux/arm/v7 ${{env.imageRepository}}:build-${{env.version}}-arm32v7
           docker pull --platform linux/arm64 ${{env.imageRepository}}:build-${{env.version}}-arm64v8
