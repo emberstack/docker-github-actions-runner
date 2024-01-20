@@ -48,6 +48,14 @@ else
 fi
 
 
+cleanup() {
+    ./config.sh remove --token ${REG_TOKEN}
+}
+
+echo "Setup - Cleaning runner..."
+cleanup
+
+
 echo "Setup - Configuring runner..."
 if [ -z "$REPO" ]; then
   ./config.sh --url https://github.com/${ORGANIZATION} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
@@ -55,10 +63,7 @@ else
   ./config.sh --url https://github.com/${ORGANIZATION}/${REPO} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
 fi
 
-cleanup() {
-    echo "Exit - Removing runner..."
-    ./config.sh remove --token ${REG_TOKEN}
-}
+
 
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
