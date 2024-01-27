@@ -58,9 +58,9 @@ cleanup
 
 echo "Setup - Configuring runner..."
 if [ -z "$REPO" ]; then
-  ./config.sh --url https://github.com/${ORGANIZATION} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
+  ./config.sh --url https://github.com/${ORGANIZATION} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME} --replace
 else
-  ./config.sh --url https://github.com/${ORGANIZATION}/${REPO} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME}
+  ./config.sh --url https://github.com/${ORGANIZATION}/${REPO} --token ${REG_TOKEN} --labels ${LABELS} --name ${NAME} --replace
 fi
 
 
